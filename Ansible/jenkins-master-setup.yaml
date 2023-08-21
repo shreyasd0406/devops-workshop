@@ -1,0 +1,28 @@
+-------
+- hosts: jenkins-master
+  become: true
+  tasks:
+  - name: Add key for jenkins
+    apt_key:
+      url: https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+      state: present
+  - name: Add the repository for jenkins
+    apt_repository:
+      repo: 'deb https://pkg.jenkins.io/debian-stable binary/'
+      state: present
+  - name: Install Java openjdk-11-jre
+    apt:
+      name: openjdk-11-jre
+      state: present
+  - name: Install jenkins on server
+    apt:
+      name: jenkins
+      state: present
+  - name: Service Start of Jenkins
+    service:
+      name: jenkins
+      state: started
+  - name: Enable the jenkins service
+    service:
+      name: jenkins
+      enabled: yes
