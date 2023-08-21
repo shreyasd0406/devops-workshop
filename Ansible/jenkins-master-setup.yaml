@@ -1,4 +1,4 @@
--------
+---
 - hosts: jenkins-master
   become: true
   tasks:
@@ -26,7 +26,7 @@
     service:
       name: jenkins
       state: started
-      
+
   - name: Enable the jenkins service
     service:
       name: jenkins
