@@ -23,3 +23,24 @@
     src: /opt/apache-maven-3.9.4-bin.tar.gz
     dest: /opt
     remote_src: yes
+  
+  - name: Install docker
+    apt: 
+      name: docker.io
+      state: present
+
+  - name: give permission for the docker.sock to avoid service start
+    file: 
+      path: /var/run/docker.sock
+      state: file
+      mode: 0777
+
+  - name: start docker service
+    service: 
+      name: docker
+      state: started
+
+  - name: enable the docker services
+    service:
+      name: docker
+      enabled: yes
